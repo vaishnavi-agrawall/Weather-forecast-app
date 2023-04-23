@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MY WEATHER APP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Weather</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Humidity</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Timmings</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Raining status</a></li>
+                  <li><a class="dropdown-item" href="#">Sunrise and Sunset</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">storm</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Contact us</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">WEATHER</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary">satisfy</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Unsatisfy</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              This week
+            </button>
+          </div>
+        </div>
+        <body>
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+              <symbol id="check2" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+              </symbol>
+              <symbol id="circle-half" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+              </symbol>
+              <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+              </symbol>
+              <symbol id="sun-fill" viewBox="0 0 16 16">
+                <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+              </symbol>
+            </svg>
+        
+            <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+              <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+                <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+                <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
+                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+                    Light
+                    <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+                    Dark
+                    <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
+                    <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                    Auto
+                    <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                  </button>
+                </li>
+              </ul>
+            </div>
+        
+            
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol id="check" viewBox="0 0 16 16">
+            <title>Check</title>
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+          </symbol>
+        </svg>
+        
+        <div class="container py-3">
+          <header>
+            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+              <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none L-Affiliate-Tagged">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img"><title>Bootstrap</title><path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path></svg>
+                <span class="fs-4">weather today</span>
+              </a>
+        
+              <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none L-Affiliate-Tagged" href="#">Temperature</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none L-Affiliate-Tagged" href="#">Precipitaton</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none L-Affiliate-Tagged" href="#">Wind</a>
+                <a class="py-2 link-body-emphasis text-decoration-none L-Affiliate-Tagged" href="#"> Directions</a>
+              </nav>
+            </div>
+        
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+              <h1 class="display-4 fw-normal">Weather for  <span id="cityName"></span></h1>
+              <p class="fs-5 text-body-secondary"> Weather app will provide you the accurate weather details of various regions.</p>
+            </div>
+          </header>
+        
+          <main>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Temperature</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><small class="text-body-secondary fw-light">Celsius</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <li>Temperature is <span id="temp"></span></li>
+                      <li>minimum temperature is <span id="min_temp"></span></li>
+                      <li>maximum temperature is <span id="max_temp"></span></li>
+                      
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Moon Phase</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">humdidity info</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><small class="text-body-secondary fw-light">Percent%</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Wind Degree is <span id="wind_degrees"></span></li>
+                        <li>feels like <span id="feels_like"></span></li>
+                        <li>Humidity is <span id="humidity"></span></li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-primary">UV Index</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                  <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal"> wind info</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><small class="text-body-secondary fw-light">Km/hr</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                       
+                        <li>Wind Speeed is <span id="wind_speed"></span></li>
+                        <li>Sunrise Time is <span id="sunrise"></span></li>
+                        <li>Sunset Time is <span id="sunset"></span></li>
+                
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-primary">Dew Point</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <h2 class="display-6 text-center mb-4"> Weather of other common places</h2>
+        
+            <div class="table-responsive">
+              <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th style="width: 34%;"></th>
+                    <th style="width: 22%;">Cloud_pct</th>
+<th style="width: 22%;">Feels_like</th>Feels_like
+<th style="width: 22%;">Humidity</th>
+<th style="width: 22%;">Max_temp</th>
+<th style="width: 22%;">Min_temp</th>
+<th style="width: 22%;">Sunrise</th>
+<th style="width: 22%;">Sunset </th>
+<th style="width: 22%;">Temp</th>
+<th style="width: 22%;">Wind_degrees</th>
+<th style="width: 22%;">Wind_speed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">KOLKATA</th>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">BHOPAL</th>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                </tbody>
+        
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">CHENNAI</th>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">LUCKNOW</th>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">BENGALURU</th>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">MUMBAI</th>
+                    <td></td>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </main>
+        
+          <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+              <div class="col-12 col-md">
+                <img class="mb-2" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19">
+                <small class="d-block mb-3 text-body-secondary">© 2017–2023</small>
+              </div>
+              <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Cool stuff</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Humidity</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Teamperatures</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Pressure</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">sunrise</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Sunset</a></li>
+                </ul>
+              </div>
+              <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Resource</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Resource name</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Another resource</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Final resource</a></li>
+                </ul>
+              </div>
+              <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Team</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Locations</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Privacy</a></li>
+                  <li class="mb-1"><a class="link-secondary text-decoration-none L-Affiliate-Tagged" href="#">Terms</a></li>
+                </ul>
+              </div>
+            </div>
+          </footer>
+        </div>
+        
+        
+            
+          
+        
+        <div class="liner-scroll-points-container"></div><div class="LImageHighlighter" data-image-id="null" style="display: none;"><div class="LImageHighlighter_btn LImageHighlighterbtn--static"><div class="LImageHighlighterhighlight"><div class="LImageHighlightericon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.86955 0.219635L6.69192 4.75749C6.68483 4.76753 6.67978 4.77887 6.67708 4.79085C6.67437 4.80284 6.67406 4.81525 6.67616 4.82736C6.67825 4.83947 6.68272 4.85104 6.6893 4.86142C6.69588 4.8718 6.70444 4.88078 6.7145 4.88785L11.9389 8.54597C11.949 8.55312 11.9604 8.5582 11.9725 8.56091C11.9845 8.56362 11.997 8.56391 12.0092 8.56176C12.0214 8.55961 12.033 8.55507 12.0434 8.54839C12.0538 8.54172 12.0628 8.53304 12.0698 8.52288L15.0655 4.24447C15.662 5.3643 16 6.64267 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C8.64378 0 9.26979 0.0760423 9.86955 0.219635ZM8.8715 10.3427L11.5684 9.13051C11.6171 9.10844 11.6233 9.04224 11.5797 9.01145L6.39991 5.38514C6.38995 5.37824 6.37835 5.37408 6.36628 5.3731C6.3542 5.37212 6.34208 5.37435 6.33114 5.37956C6.3202 5.38477 6.31084 5.39277 6.30399 5.40276C6.29714 5.41276 6.29305 5.42438 6.29213 5.43646L6.07556 8.38482L5.6301 9.01299C5.61972 9.02799 5.61567 9.04648 5.61884 9.06445C5.62201 9.08242 5.63215 9.09841 5.64704 9.10896L8.33418 10.9909C8.34158 10.9961 8.34995 10.9998 8.35878 11.0017C8.36762 11.0037 8.37676 11.0039 8.38568 11.0023C8.3946 11.0008 8.40311 10.9974 8.41074 10.9926C8.41838 10.9877 8.42497 10.9814 8.43015 10.9739L8.8715 10.3427ZM7.74707 11.3809L7.33805 11.966C7.31752 11.9901 7.28313 11.9983 7.25439 11.9983L4.04686 11.9998C4.03672 11.9964 4.02752 11.9907 4.01998 11.9831C4.01244 11.9755 4.00677 11.9663 4.00343 11.9561C4.00009 11.9459 3.99917 11.9351 4.00075 11.9246C4.00232 11.914 4.00633 11.9039 4.01248 11.8951L5.48435 9.79665C5.48953 9.78922 5.49612 9.78289 5.50375 9.77802C5.51138 9.77314 5.5199 9.76982 5.52882 9.76825C5.53773 9.76667 5.54687 9.76688 5.55571 9.76885C5.56455 9.77081 5.57291 9.77451 5.58032 9.77972L7.73065 11.2855C7.76144 11.307 7.76862 11.3501 7.74707 11.3809Z" fill="#00C3CC"></path></svg></div><span class="LImageHighlightertext">Highlight</span></div></div><div class="L-ImageTooltip"><div class="L-ImageTooltipmain"><div class="L-ImageTooltipcolor"><button class="L-ImageTooltipcolorBtn"><div class="L-ImageTooltipcolorParts"><div class="L-ImageTooltipcolorPartItem L-First"></div></div><div class="L-ImageTooltipcolorArrow"></div></button><div class="L-ImageTooltipcolorDropdown L-Hidden"><button class="L-ImageTooltipcolorSelect" data-slot-id="0"><div class="L-ImageTooltipcolorSelectIcon L-Yellow"></div><div class="L-ImageTooltipcolorSelectText L-Yellow">Important</div></button><button class="L-ImageTooltipcolorSelect" data-slot-id="1"><div class="L-ImageTooltipcolorSelectIcon L-Mint"></div><div class="L-ImageTooltipcolorSelectText L-Mint">Important</div></button><button class="L-ImageTooltipcolorSelect" data-slot-id="2"><div class="L-ImageTooltipcolorSelectIcon L-Orange"></div><div class="L-ImageTooltipcolorSelectText L-Orange">Important</div></button><button class="L-ImageTooltipcolorSelect" data-slot-id="3"><div class="L-ImageTooltipcolorSelectIcon L-Purple"></div><div class="L-ImageTooltipcolorSelectText L-Purple">Important</div></button><button class="L-ImageTooltipcolorSelect" data-slot-id="4"><div class="L-ImageTooltipcolorSelectIcon L-Blue"></div><div class="L-ImageTooltipcolorSelectText L-Blue">Important</div></button><button class="L-ImageTooltipcolorSelect" data-slot-id="5"><div class="L-ImageTooltipcolorSelectIcon L-Pink"></div><div class="L-ImageTooltipcolorSelectText L-Pink">Important</div></button></div></div><button class="L-ImageTooltipthread"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.8099 2.01001C13.6399 2.01001 14.3099 2.68001 14.3099 3.51001V9.38001C14.3099 10.21 13.6399 10.88 12.8099 10.88H10.8999C10.3999 10.88 9.92994 11.13 9.64994 11.55L7.99994 14.04L6.34994 11.56C6.06994 11.14 5.59994 10.89 5.09994 10.89H3.18994C2.35994 10.89 1.68994 10.22 1.68994 9.39001V3.51001C1.68994 2.68001 2.35994 2.01001 3.18994 2.01001H12.8099ZM12.8099 0.51001H3.18994C1.52994 0.51001 0.189941 1.85001 0.189941 3.51001V9.38001C0.189941 11.04 1.52994 12.38 3.18994 12.38H5.09994L7.03994 15.29C7.26994 15.63 7.63994 15.81 8.00994 15.81C8.37994 15.81 8.74994 15.64 8.97994 15.29L10.9199 12.38H12.8299C14.4899 12.38 15.8299 11.04 15.8299 9.38001V3.51001C15.8099 1.85001 14.4699 0.51001 12.8099 0.51001Z" fill="#50555C"></path><path d="M4.86995 5.52002C4.35995 5.52002 3.94995 5.93002 3.94995 6.44002C3.94995 6.95002 4.35995 7.36002 4.86995 7.36002C5.37995 7.36002 5.78995 6.95002 5.78995 6.44002C5.78995 5.93002 5.37995 5.52002 4.86995 5.52002Z" fill="#50555C"></path><path d="M7.99983 5.52002C7.48983 5.52002 7.07983 5.93002 7.07983 6.44002C7.07983 6.95002 7.48983 7.36002 7.99983 7.36002C8.50983 7.36002 8.91983 6.95002 8.91983 6.44002C8.91983 5.93002 8.50983 5.52002 7.99983 5.52002Z" fill="#50555C"></path><path d="M11.12 5.52002C10.61 5.52002 10.2 5.93002 10.2 6.44002C10.2 6.95002 10.61 7.36002 11.12 7.36002C11.63 7.36002 12.04 6.95002 12.04 6.44002C12.04 5.93002 11.63 5.52002 11.12 5.52002Z" fill="#50555C"></path></svg></button><div class="L-ImageTooltipborder"></div><button class="L-ImageTooltip_edit"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.87501 7.88335H9.98334C10.0917 7.88335 10.2 7.92502 10.275 8.00835L17.125 14.8584C17.6083 15.3417 17.6083 16.1417 17.125 16.625L16.6167 17.1334C16.375 17.3667 16.0667 17.5 15.725 17.5C15.3917 17.5 15.075 17.3667 14.8417 17.1334L7.99168 10.2834C7.91668 10.2084 7.86668 10.1 7.86668 9.99168L7.87501 7.88335ZM7.45834 6.63335C7.00001 6.63335 6.62501 7.00835 6.62501 7.46668V9.99168C6.62501 10.4334 6.80001 10.8584 7.11668 11.1667L13.9667 18.0167C14.4583 18.5084 15.0917 18.75 15.7333 18.75C16.375 18.75 17.0167 18.5084 17.5 18.0167L18.0083 17.5084C18.9833 16.5334 18.9833 14.95 18.0083 13.975L11.1583 7.12502C10.8417 6.80835 10.425 6.63335 9.98334 6.63335H7.45834Z" fill="#50555C"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M4.18333 2.5C3.27633 2.5 2.5 3.27191 2.5 4.275V14.3583C2.5 15.401 3.31313 16.25 4.18333 16.25H10C10.3452 16.25 10.625 16.5298 10.625 16.875C10.625 17.2202 10.3452 17.5 10 17.5H4.18333C2.50353 17.5 1.25 15.9657 1.25 14.3583V4.275C1.25 2.62809 2.54033 1.25 4.18333 1.25H14.5667C16.2097 1.25 17.5 2.62809 17.5 4.275V9.98333C17.5 10.3285 17.2202 10.6083 16.875 10.6083C16.5298 10.6083 16.25 10.3285 16.25 9.98333V4.275C16.25 3.27191 15.4737 2.5 14.5667 2.5H4.18333Z" fill="#50555C"></path></svg><span>Edit</span></button></div></div></div></body>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="wea.js"></script>
+  </body>
+</html>
